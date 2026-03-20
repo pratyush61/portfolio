@@ -12,10 +12,10 @@ const projects = [
   },
   {
     id: 2,
-    title: "Nike Landing Page",
+    title: "Nike Landing Page",np
     description:
       "A dynamic Nike landing page clone showcasing smooth animations with GSAP and a responsive design using Tailwind CSS. Focused on delivering an engaging user experience with interactive elements and a sleek interface.",
-    image: "/images/nike.png",
+    image: "/images/Nike.png",
     tags: ["React", "GSAP", "Tailwind CSS"],
     demoUrl: "#", // if hosted
     githubUrl: "#",
