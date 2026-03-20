@@ -12,11 +12,11 @@ const projects = [
   },
   {
     id: 2,
-    title: "Chat App",
+    title: "Nike Landing Page",
     description:
-      "A real-time chat platform built with Supabase, featuring authentication, database persistence, and instant messaging. Designed with secure auth flows and optimized queries for scalability.",
-    image: "/images/chat.jpeg",
-    tags: ["React", "Supabase", "Real-time", "Tailwind CSS"],
+      "A dynamic Nike landing page clone showcasing smooth animations with GSAP and a responsive design using Tailwind CSS. Focused on delivering an engaging user experience with interactive elements and a sleek interface.",
+    image: "/images/nike.png",
+    tags: ["React", "GSAP", "Tailwind CSS"],
     demoUrl: "#", // if hosted
     githubUrl: "#",
   },

@@ -20,6 +20,7 @@ export const About = () => {
               passion for building modern, responsive, and user-friendly web
               applications. I focus on creating clean UI designs and smooth
               user experiences.
+
             </p>    
 
             <p className="text-muted-foreground">
