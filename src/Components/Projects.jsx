@@ -3,13 +3,13 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "MyGram",
+    title: "Personal Developer Portfolio",
     description:
-      "A social media app for sharing photos and connecting with friends. Built with React & featuring a modern UI and seamless user experience.",
-    image: "/images/sm.png",
-    tags: ["React", "GSAP", "Bootstrap", "Tailwind CSS"],
-    demoUrl: "#",
-    githubUrl: "#",
+      "A modern portfolio website showcasing projects and skills with smooth animations and a responsive design using React and Tailwind CSS. Focused on delivering an engaging user experience.",
+    image: "/images/portfolio.png",
+    tags: ["React", "JavaScript", "Bootstrap", "Tailwind CSS"],
+    demoUrl: "https://portfolio-jet-ten-jjtyz5uxhe.vercel.app/",
+    githubUrl: "https://github.com/pratyush61/portfolio",
   },
   {
     id: 2,
@@ -18,8 +18,8 @@ const projects = [
       "A dynamic Nike landing page clone showcasing smooth animations with GSAP and a responsive design using Tailwind CSS. Focused on delivering an engaging user experience with interactive elements and a sleek interface.",
     image: "/images/Nike.png",
     tags: ["React", "GSAP", "Tailwind CSS"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://nike-landing-page-one-rose.vercel.app/",
+    githubUrl: "https://github.com/pratyush61/nike-landing-page",
   },
   {
     id: 3,
@@ -28,8 +28,8 @@ const projects = [
       "A visually engaging Apple-inspired UI clone featuring 3D animations with Three.js and smooth transitions powered by Framer Motion. Focused on high-performance rendering and responsive design.",
     image: "/images/apple.jpeg",
     tags: ["React", "Three.js", "Framer Motion", "Tailwind CSS"],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://apple-ui-six.vercel.app/",
+    githubUrl: "https://github.com/pratyush61/apple-ui",
   },
 ];
 
@@ -114,10 +114,13 @@ export const Projects = () => {
 
         {/* Optional View More Button */}
         <div className="text-center mt-12">
-          <button className="inline-flex items-center gap-2 px-6 py-2 border rounded-lg hover:bg-primary hover:text-white transition">
+          <a href="https://github.com/pratyush61"
+          target="_blank"
+          rel="noopener noreferrer"
+           className="inline-flex items-center gap-2 px-6 py-2 border rounded-lg hover:bg-primary hover:text-white transition">
             View More
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </a>
         </div>
       </div>
     </section>
