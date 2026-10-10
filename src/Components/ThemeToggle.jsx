@@ -3,17 +3,19 @@ import { Moon, Sun } from "lucide-react";
 import { cn } from "../lib/utils"; // Utility function for class name manipulation
 
 export const ThemeToggle = () => {
-  const [darkMode, setDarkMode] = useState(false); // Initialize darkMode state to false
+  const [darkMode, setDarkMode] = useState(() => {
+    // Dark mode is the default for first-time visitors; respect their saved choice.
+    return localStorage.getItem("theme") !== "light";
+  });
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("theme"); // Retrieve the theme from localStorage
-    if (storedTheme === "dark") {
-      setDarkMode(true); // Set darkMode state to true
-      document.documentElement.classList.add("dark"); // Apply dark mode class
-    } else {
-      document.documentElement.classList.remove("dark"); // Remove dark mode class
-      setDarkMode(false); // Set darkMode state to false
-    }
+    const storedTheme = localStorage.getItem("theme");
+    const shouldUseDark = storedTheme !== "light";
+
+    document.documentElement.classList.toggle("dark", shouldUseDark);
+    setDarkMode(shouldUseDark);
+
+    if (!storedTheme) localStorage.setItem("theme", "dark");
   }, []);
 
   const toggleTheme = () => {

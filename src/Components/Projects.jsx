@@ -3,13 +3,13 @@ import { ArrowRight, ExternalLink, Github } from "lucide-react";
 const projects = [
   {
     id: 1,
-    title: "Personal Developer Portfolio",
+    title: "RPS Arena — Rock Paper Scissors",
     description:
-      "A modern portfolio website showcasing projects and skills with smooth animations and a responsive design using React and Tailwind CSS. Focused on delivering an engaging user experience.",
-    image: "/images/portfolio.png",
-    tags: ["React", "JavaScript", "Bootstrap", "Tailwind CSS"],
-    demoUrl: "https://portfolio-jet-ten-jjtyz5uxhe.vercel.app/",
-    githubUrl: "https://github.com/pratyush61/portfolio",
+      "An interactive Rock Paper Scissors game with a responsive interface, instant round results, and a clean, game-focused experience.",
+    image: "/images/rps-arena.svg",
+    tags: ["HTML", "CSS", "JavaScript", "Game Logic"],
+    demoUrl: "https://rps-arena-chi.vercel.app/",
+    githubUrl: "https://github.com/pratyush61/rps-arena",
   },
   {
     id: 2,

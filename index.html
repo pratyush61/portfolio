@@ -4,7 +4,19 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Pratyush Dubey | Frontend Developer</title>
+    <script>
+      // Apply the saved theme before React renders to avoid a light-mode flash.
+      try {
+        const theme = localStorage.getItem("theme");
+        if (theme !== "light") {
+          document.documentElement.classList.add("dark");
+          if (!theme) localStorage.setItem("theme", "dark");
+        }
+      } catch (_) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

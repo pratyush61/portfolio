@@ -167,3 +167,14 @@ body {
     }
 
   
+
+/* Keep the star-and-meteor background visible in light mode as well. */
+html:not(.dark) .star {
+  background-color: rgb(139 92 246 / 55%);
+  box-shadow: 0 0 9px 2px rgb(139 92 246 / 16%);
+}
+
+html:not(.dark) .meteor {
+  background: linear-gradient(to right, rgb(99 102 241 / 70%), rgb(167 139 250 / 35%), transparent);
+  box-shadow: 0 0 10px 3px rgb(139 92 246 / 12%);
+}

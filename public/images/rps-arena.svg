@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+<title id="title">RPS Arena</title><desc id="desc">Rock Paper Scissors game preview illustration</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#111827"/><stop offset="1" stop-color="#312e81"/></linearGradient><linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs>
+<rect width="1200" height="700" rx="28" fill="url(#bg)"/><circle cx="170" cy="110" r="150" fill="#8b5cf6" opacity=".12"/><circle cx="1050" cy="590" r="230" fill="#38bdf8" opacity=".10"/>
+<text x="600" y="145" text-anchor="middle" font-family="Arial,sans-serif" font-size="35" fill="#c4b5fd" letter-spacing="8">PLAY • THINK • WIN</text><text x="600" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="76" fill="#fff">RPS ARENA</text>
+<g font-family="Arial,sans-serif" font-size="110" text-anchor="middle"><text x="280" y="430">✊</text><text x="600" y="430">✋</text><text x="920" y="430">✌️</text></g>
+<g fill="none" stroke="url(#accent)" stroke-width="5"><rect x="195" y="300" width="170" height="190" rx="28"/><rect x="515" y="300" width="170" height="190" rx="28"/><rect x="835" y="300" width="170" height="190" rx="28"/></g>
+<text x="600" y="580" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" fill="#cbd5e1">Rock Paper Scissors • JavaScript Game</text></svg>
