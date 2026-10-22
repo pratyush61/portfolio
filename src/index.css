@@ -1,9 +1,9 @@
  
 @import "tailwindcss";
 
-/* ========================================
-   DARK THEME
-======================================== */
+/* =========================================
+   THEME
+========================================= */
 
 @theme {
   --color-border: hsl(var(--border));
@@ -36,23 +36,11 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
-
-  @keyframes meteor {
-    0% {
-      transform: rotate(-35deg) translateX(0);
-      opacity: 0;
-    }
-    10%, 70% { opacity: 1; }
-    100% {
-      transform: rotate(-35deg) translateX(-500px);
-      opacity: 0;
-    }
-  }
 }
 
-/* ========================================
-   GLOBAL STYLES
-======================================== */
+/* =========================================
+   GLOBAL DARK MODE
+========================================= */
 
 @layer base {
   :root {
@@ -73,21 +61,21 @@
   html {
     @apply scroll-smooth;
     color-scheme: dark;
-    background: hsl(var(--background));
+    background: #05070f;
   }
 
   body {
     @apply bg-background text-foreground;
-    min-height: 100vh;
     margin: 0;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    min-height: 100vh;
     color-scheme: dark;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* ========================================
+/* =========================================
    CONTAINER
-======================================== */
+========================================= */
 
 @utility container {
   margin-inline: auto;
@@ -114,9 +102,9 @@
   }
 }
 
-/* ========================================
+/* =========================================
    CUSTOM UTILITIES
-======================================== */
+========================================= */
 
 @utility text-glow {
   @apply relative;
@@ -129,11 +117,7 @@
 
 @utility gradient-border {
   @apply relative rounded-md;
-  background: linear-gradient(
-    to right,
-    hsl(var(--card)),
-    hsl(var(--card))
-  );
+  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
   background-clip: padding-box;
   border: 1px solid transparent;
 }
@@ -144,9 +128,9 @@
     hover:scale-105 active:scale-95;
 }
 
-/* ========================================
-   ROOT LAYOUT
-======================================== */
+/* =========================================
+   PAGE LAYOUT
+========================================= */
 
 #root {
   position: relative;
@@ -157,9 +141,9 @@
   text-align: center;
 }
 
-/* ========================================
-   ANIMATED BACKGROUND BASE
-======================================== */
+/* =========================================
+   ANIMATED BACKGROUND
+========================================= */
 
 .bg-base {
   position: fixed;
@@ -170,29 +154,33 @@
 
   background:
     radial-gradient(
-      ellipse at 50% 0%,
-      rgba(109, 40, 217, 0.18),
-      transparent 60%
+      ellipse at 15% 15%,
+      rgba(139, 92, 246, 0.22),
+      transparent 45%
     ),
     radial-gradient(
-      ellipse at 100% 100%,
-      rgba(37, 99, 235, 0.10),
-      transparent 55%
+      ellipse at 85% 70%,
+      rgba(37, 99, 235, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 50% 100%,
+      rgba(236, 72, 153, 0.12),
+      transparent 50%
     ),
     #05070f;
 }
 
-/* ========================================
-   GLOWING AURORA ORBS
-======================================== */
+/* =========================================
+   GLOWING COLOR ORBS
+========================================= */
 
 .aurora {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
-  opacity: 1;
-  will-change: transform;
   pointer-events: none;
+  will-change: transform;
 }
 
 @keyframes aurora-a {
@@ -228,9 +216,9 @@
   }
 }
 
-/* ========================================
-   MOVING GRID PATTERN
-======================================== */
+/* =========================================
+   MOVING GRID
+========================================= */
 
 .bg-grid {
   position: absolute;
@@ -239,12 +227,12 @@
   background-image:
     linear-gradient(
       to right,
-      rgba(167, 139, 250, 0.09) 1px,
+      rgba(167, 139, 250, 0.08) 1px,
       transparent 1px
     ),
     linear-gradient(
       to bottom,
-      rgba(167, 139, 250, 0.09) 1px,
+      rgba(167, 139, 250, 0.08) 1px,
       transparent 1px
     );
 
@@ -267,17 +255,13 @@
 }
 
 @keyframes grid-pan {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 50px 50px;
-  }
+  from { background-position: 0 0; }
+  to { background-position: 50px 50px; }
 }
 
-/* ========================================
+/* =========================================
    TWINKLING STARS
-======================================== */
+========================================= */
 
 .star {
   position: absolute;
@@ -286,7 +270,7 @@
   background: #ffffff;
 
   box-shadow:
-    0 0 4px 1px rgba(255, 255, 255, 0.65),
+    0 0 4px 1px rgba(255, 255, 255, 0.7),
     0 0 10px 2px rgba(167, 139, 250, 0.5);
 
   pointer-events: none;
@@ -309,32 +293,58 @@
   }
 }
 
-/* ========================================
-   SHOOTING STARS
-======================================== */
+/* =========================================
+   SHOOTING STARS - MOVING DIAGONALLY
+========================================= */
 
 .meteor {
   position: absolute;
   display: block;
+  width: 120px;
+  height: 2px;
   border-radius: 999px;
 
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0),
-    #ffffff 55%,
-    #c4b5fd
+    transparent 0%,
+    rgba(196, 181, 253, 0.8) 35%,
+    #ffffff 100%
   );
 
-  box-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+  box-shadow:
+    0 0 6px rgba(255, 255, 255, 0.8),
+    0 0 14px rgba(167, 139, 250, 0.8);
 
   transform: rotate(-35deg);
   transform-origin: right center;
+
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
-/* ========================================
+@keyframes meteor {
+  0% {
+    transform: rotate(-35deg) translateX(0);
+    opacity: 0;
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(-35deg) translateX(-700px);
+    opacity: 0;
+  }
+}
+
+/* =========================================
    FLOATING PARTICLES
-======================================== */
+========================================= */
 
 .particle {
   position: absolute;
@@ -344,8 +354,7 @@
 
   background: #a78bfa;
 
-  box-shadow:
-    0 0 8px 2px rgba(139, 92, 246, 0.5);
+  box-shadow: 0 0 8px 2px rgba(139, 92, 246, 0.6);
 
   animation-name: drift-up;
   animation-timing-function: linear;
@@ -359,21 +368,24 @@
     transform: translate3d(0, 0, 0);
     opacity: 0;
   }
+
   10% {
     opacity: 0.8;
   }
+
   90% {
     opacity: 0.6;
   }
+
   100% {
     transform: translate3d(var(--dx, 0px), -100vh, 0);
     opacity: 0;
   }
 }
 
-/* ========================================
-   MOUSE-FOLLOWING GLOW
-======================================== */
+/* =========================================
+   MOUSE GLOW
+========================================= */
 
 .cursor-glow {
   position: absolute;
@@ -397,9 +409,9 @@
   pointer-events: none;
 }
 
-/* ========================================
+/* =========================================
    ACCESSIBILITY
-======================================== */
+========================================= */
 
 @media (prefers-reduced-motion: reduce) {
   .aurora,
