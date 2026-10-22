@@ -1,8 +1,7 @@
- 
-@import "tailwindcss";
+ @import "tailwindcss";
 
 /* =========================================
-   THEME AND ANIMATIONS
+   DARK THEME — CONSISTENT ON ALL DEVICES
 ========================================= */
 
 @theme {
@@ -32,13 +31,19 @@
   }
 
   @keyframes fade-in {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
 /* =========================================
-   GLOBAL DARK THEME
+   GLOBAL COLORS
 ========================================= */
 
 @layer base {
@@ -58,17 +63,25 @@
   }
 
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
     color-scheme: dark;
-    background: #05070f;
+    background-color: #05060d;
   }
 
   body {
-    @apply bg-background text-foreground;
     margin: 0;
     min-height: 100vh;
+    background-color: #05060d;
+    color: #f8fafc;
     color-scheme: dark;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: #f8fafc;
   }
 }
 
@@ -141,7 +154,8 @@
 }
 
 /* =========================================
-   BACKGROUND BASE
+   BACKGROUND
+   Same colors on every device
 ========================================= */
 
 .bg-base {
@@ -151,33 +165,35 @@
   overflow: hidden;
   pointer-events: none;
 
-  background:
+  background-color: #05060d;
+
+  background-image:
     radial-gradient(
       ellipse at 15% 15%,
-      rgba(139, 92, 246, 0.22),
+      rgba(91, 33, 182, 0.18),
       transparent 45%
     ),
     radial-gradient(
-      ellipse at 85% 70%,
-      rgba(37, 99, 235, 0.18),
+      ellipse at 85% 65%,
+      rgba(29, 78, 216, 0.14),
       transparent 45%
     ),
     radial-gradient(
       ellipse at 50% 100%,
-      rgba(236, 72, 153, 0.12),
+      rgba(157, 23, 77, 0.10),
       transparent 50%
-    ),
-    #05070f;
+    );
 }
 
 /* =========================================
-   GLOWING AURORA ORBS
+   GLOWING ORBS
 ========================================= */
 
 .aurora {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
+  opacity: 0.65;
   pointer-events: none;
   will-change: transform;
 }
@@ -205,12 +221,12 @@
     transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translate3d(10vw, -14vh, 0) scale(1.25);
+    transform: translate3d(10vw, -14vh, 0) scale(1.2);
   }
 }
 
 /* =========================================
-   MOVING GRID
+   GRID PATTERN
 ========================================= */
 
 .bg-grid {
@@ -253,7 +269,7 @@
 }
 
 /* =========================================
-   TWINKLING STARS
+   STARS
 ========================================= */
 
 .star {
@@ -263,8 +279,8 @@
   background: #ffffff;
 
   box-shadow:
-    0 0 4px 1px rgba(255, 255, 255, 0.7),
-    0 0 10px 2px rgba(167, 139, 250, 0.5);
+    0 0 4px rgba(255, 255, 255, 0.9),
+    0 0 8px rgba(167, 139, 250, 0.4);
 
   pointer-events: none;
 }
@@ -277,18 +293,17 @@
 
 @keyframes twinkle {
   0%, 100% {
-    opacity: 0.3;
-    transform: scale(0.8);
+    opacity: 0.35;
+    transform: scale(0.85);
   }
   50% {
     opacity: 1;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 }
 
 /* =========================================
    SHOOTING STARS
-   Automatic, smooth, diagonal motion
 ========================================= */
 
 .meteor {
@@ -306,8 +321,8 @@
   );
 
   box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.9),
-    0 0 14px rgba(167, 139, 250, 0.8);
+    0 0 6px rgba(255, 255, 255, 0.8),
+    0 0 12px rgba(167, 139, 250, 0.6);
 
   pointer-events: none;
   will-change: transform, opacity;
@@ -322,15 +337,12 @@
     transform: translate3d(0, 0, 0) rotate(-35deg);
     opacity: 0;
   }
-
   5% {
     opacity: 1;
   }
-
   65% {
     opacity: 1;
   }
-
   100% {
     transform: translate3d(-700px, 490px, 0) rotate(-35deg);
     opacity: 0;
@@ -346,10 +358,9 @@
   bottom: -10px;
   display: block;
   border-radius: 50%;
-
   background: #a78bfa;
 
-  box-shadow: 0 0 8px 2px rgba(139, 92, 246, 0.6);
+  box-shadow: 0 0 8px 2px rgba(139, 92, 246, 0.45);
 
   animation-name: drift-up;
   animation-timing-function: linear;
@@ -363,15 +374,12 @@
     transform: translate3d(0, 0, 0);
     opacity: 0;
   }
-
   10% {
-    opacity: 0.8;
+    opacity: 0.7;
   }
-
   90% {
-    opacity: 0.6;
+    opacity: 0.5;
   }
-
   100% {
     transform: translate3d(var(--dx, 0px), -100vh, 0);
     opacity: 0;
@@ -379,29 +387,38 @@
 }
 
 /* =========================================
-   MOUSE-FOLLOWING GLOW
+   MOUSE GLOW
 ========================================= */
 
 .cursor-glow {
   position: absolute;
   top: 0;
   left: 0;
-
   width: 520px;
   height: 520px;
   margin: -260px 0 0 -260px;
-
   border-radius: 50%;
 
   background: radial-gradient(
     circle,
-    rgba(139, 92, 246, 0.16),
-    rgba(59, 130, 246, 0.06) 35%,
+    rgba(139, 92, 246, 0.12),
+    rgba(59, 130, 246, 0.04) 35%,
     transparent 70%
   );
 
-  will-change: transform;
   pointer-events: none;
+  will-change: transform;
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT ONLY
+   No device-specific color changes
+========================================= */
+
+@media (max-width: 640px) {
+  .aurora {
+    filter: blur(90px);
+  }
 }
 
 /* =========================================
@@ -412,7 +429,8 @@
   .aurora,
   .bg-grid,
   .twinkle,
-  .particle {
+  .particle,
+  .meteor {
     animation: none !important;
   }
 
