@@ -11,22 +11,20 @@ import { Footer } from "../Components/Footer.jsx";
 
 export const Home = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground flex overflow-x-hidden flex-col">
+    <div className="relative min-h-screen bg-background text-foreground flex overflow-x-hidden flex-col">
       <StarBackground />
 
-      <NavBar />
-
-      <HeroSection />
-
-      <About />
-
-      <Skills />
-
-      <Projects />
-
-      <Contact />
-
-      <Footer />
+      <div className="relative z-10 flex flex-col">
+        <NavBar />
+        <HeroSection />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   );
 };
+
+export default Home;
