@@ -1,6 +1,6 @@
  
 import React from "react";
-import { ArrowDown, Download } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 export const HeroSection = () => {
   return (
@@ -34,16 +34,6 @@ export const HeroSection = () => {
               className="px-6 py-3 border border-primary text-primary rounded-xl hover:bg-primary/10 transition"
             >
               Contact Me
-            </a>
-
-            <a
-              href="https://drive.google.com/file/d/1dEORa0UmBgI0jlc3RgW6jVsZQx7Ci5A9/view"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition inline-flex items-center justify-center gap-2"
-            >
-              <Download className="h-5 w-5" />
-              Download CV
             </a>
           </div>
         </div>
