@@ -1,4 +1,4 @@
- 
+
 import { useEffect, useState } from "react";
 
 export const StarBackground = () => {
@@ -9,33 +9,37 @@ export const StarBackground = () => {
 
   useEffect(() => {
     setStars(
-      Array.from({ length: 150 }, (_, id) => ({
+      Array.from({ length: 130 }, (_, id) => ({
         id,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        size: Math.random() * 2.5 + 1,
+        size: Math.random() * 2 + 1,
         duration: Math.random() * 3 + 2,
-        delay: Math.random() * 5,
+        delay: Math.random() * -5,
       }))
     );
 
     setMeteors(
-      Array.from({ length: 7 }, (_, id) => ({
-        id,
-        x: Math.random() * 100,
-        y: Math.random() * 60,
-        delay: Math.random() * 12,
-        duration: Math.random() * 3 + 3,
-      }))
+      Array.from({ length: 9 }, (_, id) => {
+        const duration = Math.random() * 2 + 2.5;
+
+        return {
+          id,
+          x: Math.random() * 100,
+          y: Math.random() * 65,
+          duration,
+          delay: -(Math.random() * duration),
+        };
+      })
     );
 
     setParticles(
-      Array.from({ length: 25 }, (_, id) => ({
+      Array.from({ length: 24 }, (_, id) => ({
         id,
         x: Math.random() * 100,
-        size: Math.random() * 4 + 2,
-        delay: Math.random() * 15,
-        duration: Math.random() * 12 + 12,
+        size: Math.random() * 3 + 2,
+        delay: -(Math.random() * 15),
+        duration: Math.random() * 8 + 10,
         dx: `${Math.random() * 100 - 50}px`,
       }))
     );
@@ -46,11 +50,9 @@ export const StarBackground = () => {
       setCursor({ x: event.clientX, y: event.clientY });
     };
 
-    const media = window.matchMedia("(pointer: fine)");
-
-    if (media.matches) {
-      window.addEventListener("mousemove", handleMouseMove);
-    }
+    window.addEventListener("mousemove", handleMouseMove, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
@@ -62,19 +64,20 @@ export const StarBackground = () => {
       aria-hidden="true"
       className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-base"
     >
-      {/* Moving glowing orbs */}
+      {/* Purple glow */}
       <div
         className="aurora"
         style={{
-          width: "28rem",
-          height: "28rem",
+          width: "30rem",
+          height: "30rem",
           top: "-8rem",
           left: "-5rem",
           background: "rgba(139, 92, 246, 0.22)",
-          animation: "aurora-a 24s ease-in-out infinite",
+          animation: "aurora-a 18s ease-in-out infinite alternate",
         }}
       />
 
+      {/* Blue glow */}
       <div
         className="aurora"
         style={{
@@ -83,10 +86,11 @@ export const StarBackground = () => {
           top: "20%",
           right: "-10rem",
           background: "rgba(59, 130, 246, 0.18)",
-          animation: "aurora-b 30s ease-in-out infinite",
+          animation: "aurora-b 22s ease-in-out infinite alternate",
         }}
       />
 
+      {/* Pink glow */}
       <div
         className="aurora"
         style={{
@@ -95,7 +99,7 @@ export const StarBackground = () => {
           bottom: "-12rem",
           left: "25%",
           background: "rgba(236, 72, 153, 0.14)",
-          animation: "aurora-c 28s ease-in-out infinite",
+          animation: "aurora-c 20s ease-in-out infinite alternate",
         }}
       />
 
@@ -118,7 +122,7 @@ export const StarBackground = () => {
         />
       ))}
 
-      {/* Shooting stars */}
+      {/* Shooting stars: already moving on page load */}
       {meteors.map((meteor) => (
         <div
           key={meteor.id}
@@ -126,14 +130,13 @@ export const StarBackground = () => {
           style={{
             top: `${meteor.y}%`,
             left: `${meteor.x}%`,
-            width: "120px",
-            height: "2px",
-            animation: `meteor ${meteor.duration}s linear ${meteor.delay}s infinite`,
+            animationDuration: `${meteor.duration}s`,
+            animationDelay: `${meteor.delay}s`,
           }}
         />
       ))}
 
-      {/* Floating glowing particles */}
+      {/* Floating particles */}
       {particles.map((particle) => (
         <div
           key={particle.id}
@@ -149,11 +152,11 @@ export const StarBackground = () => {
         />
       ))}
 
-      {/* Mouse-following glow */}
+      {/* Mouse glow is separate from star animations */}
       <div
         className="cursor-glow hidden md:block"
         style={{
-          transform: `translate(${cursor.x}px, ${cursor.y}px)`,
+          transform: `translate3d(${cursor.x}px, ${cursor.y}px, 0)`,
         }}
       />
     </div>
