@@ -1,6 +1,10 @@
  
 @import "tailwindcss";
 
+/* ========================================
+   DARK THEME
+======================================== */
+
 @theme {
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
@@ -34,15 +38,26 @@
   }
 
   @keyframes meteor {
-    0% { transform: rotate(215deg) translateX(0); opacity: 1; }
-    70% { opacity: 1; }
-    100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
+    0% {
+      transform: rotate(-35deg) translateX(0);
+      opacity: 0;
+    }
+    10%, 70% { opacity: 1; }
+    100% {
+      transform: rotate(-35deg) translateX(-500px);
+      opacity: 0;
+    }
   }
 }
+
+/* ========================================
+   GLOBAL STYLES
+======================================== */
 
 @layer base {
   :root {
     color-scheme: dark;
+
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
     --card: 222 47% 8%;
@@ -51,7 +66,9 @@
     --border: 217 33% 20%;
   }
 
-  * { @apply border-border; }
+  * {
+    @apply border-border;
+  }
 
   html {
     @apply scroll-smooth;
@@ -61,22 +78,45 @@
 
   body {
     @apply bg-background text-foreground;
+    min-height: 100vh;
+    margin: 0;
     font-feature-settings: "rlig" 1, "calt" 1;
     color-scheme: dark;
-    min-height: 100vh;
   }
 }
+
+/* ========================================
+   CONTAINER
+======================================== */
 
 @utility container {
   margin-inline: auto;
   padding-inline: 2rem;
 
-  @media (width >= 640px) { max-width: 640px; }
-  @media (width >= 768px) { max-width: 768px; }
-  @media (width >= 1024px) { max-width: 1024px; }
-  @media (width >= 1280px) { max-width: 1280px; }
-  @media (width >= 1400px) { max-width: 1400px; }
+  @media (width >= 640px) {
+    max-width: 640px;
+  }
+
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+
+  @media (width >= 1280px) {
+    max-width: 1280px;
+  }
+
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
 }
+
+/* ========================================
+   CUSTOM UTILITIES
+======================================== */
 
 @utility text-glow {
   @apply relative;
@@ -89,7 +129,11 @@
 
 @utility gradient-border {
   @apply relative rounded-md;
-  background: linear-gradient(to right, hsl(var(--card)), hsl(var(--card)));
+  background: linear-gradient(
+    to right,
+    hsl(var(--card)),
+    hsl(var(--card))
+  );
   background-clip: padding-box;
   border: 1px solid transparent;
 }
@@ -100,85 +144,152 @@
     hover:scale-105 active:scale-95;
 }
 
-@utility star {
-  @apply absolute rounded-full bg-white;
-  box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
-}
-
-@utility meteor {
-  @apply absolute bg-linear-to-r from-white via-white to-transparent rounded-full;
-  box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
-}
+/* ========================================
+   ROOT LAYOUT
+======================================== */
 
 #root {
-  max-width: 100%;
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
   margin: 0 auto;
   padding: 0;
   text-align: center;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Animated background */
+/* ========================================
+   ANIMATED BACKGROUND BASE
+======================================== */
 
 .bg-base {
-  position: relative;
-  isolation: isolate;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+
   background:
-    radial-gradient(ellipse 80% 60% at 50% -10%, hsl(var(--primary) / 0.18), transparent 60%),
-    radial-gradient(ellipse 60% 50% at 100% 100%, rgb(56 189 248 / 0.08), transparent 60%),
-    hsl(var(--background));
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(109, 40, 217, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(37, 99, 235, 0.10),
+      transparent 55%
+    ),
+    #05070f;
 }
+
+/* ========================================
+   GLOWING AURORA ORBS
+======================================== */
 
 .aurora {
   position: absolute;
-  border-radius: 9999px;
+  border-radius: 50%;
   filter: blur(90px);
+  opacity: 1;
   will-change: transform;
   pointer-events: none;
 }
 
 @keyframes aurora-a {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  33% { transform: translate3d(14vw, 10vh, 0) scale(1.2); }
-  66% { transform: translate3d(-6vw, 16vh, 0) scale(0.95); }
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(14vw, 10vh, 0) scale(1.2);
+  }
+  66% {
+    transform: translate3d(-6vw, 16vh, 0) scale(0.95);
+  }
 }
 
 @keyframes aurora-b {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.1); }
-  50% { transform: translate3d(-16vw, -10vh, 0) scale(0.9); }
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate3d(-16vw, -10vh, 0) scale(0.9);
+  }
 }
 
 @keyframes aurora-c {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  40% { transform: translate3d(10vw, -14vh, 0) scale(1.25); }
-  80% { transform: translate3d(-8vw, 6vh, 0) scale(1); }
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(10vw, -14vh, 0) scale(1.25);
+  }
+  80% {
+    transform: translate3d(-8vw, 6vh, 0) scale(1);
+  }
 }
+
+/* ========================================
+   MOVING GRID PATTERN
+======================================== */
 
 .bg-grid {
   position: absolute;
   inset: 0;
+
   background-image:
-    linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
-  mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
-  animation: grid-pan 40s linear infinite;
+    linear-gradient(
+      to right,
+      rgba(167, 139, 250, 0.09) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(167, 139, 250, 0.09) 1px,
+      transparent 1px
+    );
+
+  background-size: 50px 50px;
+
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    black 15%,
+    transparent 80%
+  );
+
+  mask-image: radial-gradient(
+    ellipse at center,
+    black 15%,
+    transparent 80%
+  );
+
+  animation: grid-pan 30s linear infinite;
   pointer-events: none;
 }
 
 @keyframes grid-pan {
-  from { background-position: 0 0; }
-  to { background-position: 56px 56px; }
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 50px 50px;
+  }
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
+/* ========================================
+   TWINKLING STARS
+======================================== */
+
+.star {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: #ffffff;
+
+  box-shadow:
+    0 0 4px 1px rgba(255, 255, 255, 0.65),
+    0 0 10px 2px rgba(167, 139, 250, 0.5);
+
+  pointer-events: none;
 }
 
 .twinkle {
@@ -187,40 +298,119 @@ body {
   animation-iteration-count: infinite;
 }
 
-@keyframes drift-up {
-  0% { transform: translate3d(0, 0, 0); opacity: 0; }
-  10% { opacity: 0.9; }
-  90% { opacity: 0.6; }
-  100% { transform: translate3d(var(--dx, 0px), -110vh, 0); opacity: 0; }
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
 }
+
+/* ========================================
+   SHOOTING STARS
+======================================== */
+
+.meteor {
+  position: absolute;
+  display: block;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    #ffffff 55%,
+    #c4b5fd
+  );
+
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.8);
+
+  transform: rotate(-35deg);
+  transform-origin: right center;
+  pointer-events: none;
+}
+
+/* ========================================
+   FLOATING PARTICLES
+======================================== */
 
 .particle {
   position: absolute;
   bottom: -10px;
-  border-radius: 9999px;
-  background: hsl(var(--primary));
-  box-shadow: 0 0 12px 2px hsl(var(--primary) / 0.6);
+  display: block;
+  border-radius: 50%;
+
+  background: #a78bfa;
+
+  box-shadow:
+    0 0 8px 2px rgba(139, 92, 246, 0.5);
+
   animation-name: drift-up;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
+
   pointer-events: none;
 }
+
+@keyframes drift-up {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(var(--dx, 0px), -100vh, 0);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   MOUSE-FOLLOWING GLOW
+======================================== */
 
 .cursor-glow {
   position: absolute;
   top: 0;
   left: 0;
+
   width: 520px;
   height: 520px;
   margin: -260px 0 0 -260px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, hsl(var(--primary) / 0.16), transparent 65%);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(139, 92, 246, 0.16),
+    rgba(59, 130, 246, 0.06) 35%,
+    transparent 70%
+  );
+
   will-change: transform;
   pointer-events: none;
 }
 
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .aurora, .bg-grid, .twinkle, .particle, .meteor {
+  .aurora,
+  .bg-grid,
+  .twinkle,
+  .particle,
+  .meteor {
     animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
