@@ -1,4 +1,4 @@
- 
+
 @import "tailwindcss";
 
 /* =========================================
@@ -50,7 +50,6 @@
 @layer base {
   :root {
     color-scheme: dark;
-
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
     --card: 222 47% 8%;
@@ -79,9 +78,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1,
-  h2,
-  h3 {
+  h1, h2, h3 {
     color: #f8fafc;
   }
 }
@@ -155,8 +152,7 @@
 }
 
 /* =========================================
-   BACKGROUND BASE
-   Deep black on all devices
+   DARK BACKGROUND — NO GRID
 ========================================= */
 
 .bg-base {
@@ -168,6 +164,11 @@
   background: #05060d;
 }
 
+/* Remove only the graph-like pattern */
+.bg-grid {
+  display: none !important;
+}
+
 /* =========================================
    GLOWING ORBS
 ========================================= */
@@ -177,7 +178,6 @@
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.35;
-  mix-blend-mode: normal;
   pointer-events: none;
   will-change: transform;
 }
@@ -210,49 +210,6 @@
 }
 
 /* =========================================
-   GRID PATTERN
-========================================= */
-
-.bg-grid {
-  position: absolute;
-  inset: 0;
-
-  background-image:
-    linear-gradient(
-      to right,
-      rgba(167, 139, 250, 0.07) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      rgba(167, 139, 250, 0.07) 1px,
-      transparent 1px
-    );
-
-  background-size: 50px 50px;
-
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    black 15%,
-    transparent 80%
-  );
-
-  mask-image: radial-gradient(
-    ellipse at center,
-    black 15%,
-    transparent 80%
-  );
-
-  animation: grid-pan 24s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes grid-pan {
-  from { background-position: 0 0; }
-  to { background-position: 50px 50px; }
-}
-
-/* =========================================
    TWINKLING STARS
 ========================================= */
 
@@ -261,11 +218,9 @@
   display: block;
   border-radius: 50%;
   background: #ffffff;
-
   box-shadow:
     0 0 3px rgba(255, 255, 255, 0.9),
     0 0 7px rgba(167, 139, 250, 0.35);
-
   pointer-events: none;
 }
 
@@ -287,7 +242,7 @@
 }
 
 /* =========================================
-   SHOOTING STARS
+   MOVING SHOOTING STARS
 ========================================= */
 
 .meteor {
@@ -296,21 +251,17 @@
   width: 140px;
   height: 2px;
   border-radius: 999px;
-
   background: linear-gradient(
     90deg,
     transparent 0%,
     rgba(196, 181, 253, 0.8) 35%,
     #ffffff 100%
   );
-
   box-shadow:
     0 0 5px rgba(255, 255, 255, 0.8),
     0 0 10px rgba(167, 139, 250, 0.6);
-
   pointer-events: none;
   will-change: transform, opacity;
-
   animation-name: meteor;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -321,15 +272,12 @@
     transform: translate3d(0, 0, 0) rotate(-35deg);
     opacity: 0;
   }
-
   5% {
     opacity: 1;
   }
-
   65% {
     opacity: 1;
   }
-
   100% {
     transform: translate3d(-700px, 490px, 0) rotate(-35deg);
     opacity: 0;
@@ -346,13 +294,10 @@
   display: block;
   border-radius: 50%;
   background: #a78bfa;
-
   box-shadow: 0 0 7px 2px rgba(139, 92, 246, 0.4);
-
   animation-name: drift-up;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-
   pointer-events: none;
 }
 
@@ -374,7 +319,7 @@
 }
 
 /* =========================================
-   MOUSE GLOW
+   MOUSE-FOLLOWING GLOW
 ========================================= */
 
 .cursor-glow {
@@ -385,14 +330,12 @@
   height: 520px;
   margin: -260px 0 0 -260px;
   border-radius: 50%;
-
   background: radial-gradient(
     circle,
     rgba(139, 92, 246, 0.12),
     rgba(59, 130, 246, 0.04) 35%,
     transparent 70%
   );
-
   pointer-events: none;
   will-change: transform;
 }
@@ -403,7 +346,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .aurora,
-  .bg-grid,
   .twinkle,
   .particle,
   .meteor {
