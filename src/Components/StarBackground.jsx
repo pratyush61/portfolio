@@ -8,37 +8,37 @@ export const StarBackground = () => {
   const [cursor, setCursor] = useState({ x: -1000, y: -1000 });
 
   useEffect(() => {
-    const createStars = () =>
-      Array.from({ length: 120 }, (_, i) => ({
-        id: i,
+    setStars(
+      Array.from({ length: 120 }, (_, id) => ({
+        id,
         size: Math.random() * 3 + 1,
         x: Math.random() * 100,
         y: Math.random() * 100,
         duration: Math.random() * 4 + 2,
         delay: Math.random() * 5,
-      }));
+      }))
+    );
 
-    const createMeteors = () =>
-      Array.from({ length: 7 }, (_, i) => ({
-        id: i,
+    setMeteors(
+      Array.from({ length: 7 }, (_, id) => ({
+        id,
         x: Math.random() * 100,
+        y: Math.random() * 50,
         delay: Math.random() * 15,
         duration: Math.random() * 3 + 3,
-      }));
+      }))
+    );
 
-    const createParticles = () =>
-      Array.from({ length: 22 }, (_, i) => ({
-        id: i,
+    setParticles(
+      Array.from({ length: 22 }, (_, id) => ({
+        id,
         x: Math.random() * 100,
         size: Math.random() * 4 + 2,
         delay: Math.random() * 15,
         duration: Math.random() * 12 + 12,
         dx: `${Math.random() * 100 - 50}px`,
-      }));
-
-    setStars(createStars());
-    setMeteors(createMeteors());
-    setParticles(createParticles());
+      }))
+    );
   }, []);
 
   useEffect(() => {
@@ -46,7 +46,9 @@ export const StarBackground = () => {
       setCursor({ x: event.clientX, y: event.clientY });
     };
 
-    if (window.matchMedia("(pointer: fine)").matches) {
+    const media = window.matchMedia("(pointer: fine)");
+
+    if (media.matches) {
       window.addEventListener("mousemove", handleMouseMove);
     }
 
@@ -104,7 +106,7 @@ export const StarBackground = () => {
           key={meteor.id}
           className="meteor"
           style={{
-            top: `${meteor.y ?? Math.random() * 50}%`,
+            top: `${meteor.y}%`,
             left: `${meteor.x}%`,
             width: "120px",
             height: "2px",
