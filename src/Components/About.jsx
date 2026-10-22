@@ -1,11 +1,12 @@
-import { Briefcase, Code, User } from "lucide-react";
+ 
+import { Briefcase, Code, User, Download } from "lucide-react";
 
 export const About = () => {
   return (
     <section id="about" className="py-24 px-4 relative">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          About <span className="text-primary"> Me</span>
+          About <span className="text-primary">Me</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -13,15 +14,13 @@ export const About = () => {
             <h3 className="text-2xl font-semibold">
               Passionate Frontend Developer
             </h3>
-        
 
             <p className="text-muted-foreground">
               Hello! I'm Pratyush Dubey, a frontend web developer with a
               passion for building modern, responsive, and user-friendly web
               applications. I focus on creating clean UI designs and smooth
               user experiences.
-
-            </p>    
+            </p>
 
             <p className="text-muted-foreground">
               I have experience working with technologies like React,
@@ -36,9 +35,12 @@ export const About = () => {
               </a>
 
               <a
-                href=""
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+                href="https://drive.google.com/file/d/1dEORa0UmBgI0jlc3RgW6jVsZQx7Ci5A9/view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300 inline-flex items-center justify-center gap-2"
               >
+                <Download className="h-4 w-4" />
                 Download CV
               </a>
             </div>
@@ -51,7 +53,9 @@ export const About = () => {
                   <Code className="h-6 w-6 text-primary" />
                 </div>
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg">Frontend Development</h4>
+                  <h4 className="font-semibold text-lg">
+                    Frontend Development
+                  </h4>
                   <p className="text-muted-foreground">
                     Building responsive and interactive user interfaces using
                     modern frontend frameworks.
@@ -80,9 +84,10 @@ export const About = () => {
                 <div className="p-3 rounded-full bg-primary/10">
                   <Briefcase className="h-6 w-6 text-primary" />
                 </div>
-
                 <div className="text-left">
-                  <h4 className="font-semibold text-lg">Performance Optimization</h4>
+                  <h4 className="font-semibold text-lg">
+                    Performance Optimization
+                  </h4>
                   <p className="text-muted-foreground">
                     Optimizing web performance to ensure fast load times and
                     smooth interactions.
@@ -96,3 +101,5 @@ export const About = () => {
     </section>
   );
 };
+
+export default About;
