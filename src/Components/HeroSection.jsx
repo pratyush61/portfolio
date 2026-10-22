@@ -1,11 +1,12 @@
+ 
 import React from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Download } from "lucide-react";
 
 export const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 mx-auto "
+      className="relative min-h-screen flex flex-col items-center justify-center px-4 mx-auto"
     >
       <div className="container max-w-4xl mx-auto text-center z-10">
         <div className="space-y-6">
@@ -20,18 +21,29 @@ export const HeroSection = () => {
             responsive, and user-friendly web experiences.
           </p>
 
-          <div className="flex justify-center space-x-4">
+          <div className="flex justify-center flex-wrap gap-4">
             <a
               href="#projects"
               className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition"
             >
               View Projects
             </a>
+
             <a
               href="#contact"
               className="px-6 py-3 border border-primary text-primary rounded-xl hover:bg-primary/10 transition"
             >
               Contact Me
+            </a>
+
+            <a
+              href="https://drive.google.com/file/d/1dEORa0UmBgI0jlc3RgW6jVsZQx7Ci5A9/view"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition inline-flex items-center justify-center gap-2"
+            >
+              <Download className="h-5 w-5" />
+              Download CV
             </a>
           </div>
         </div>
@@ -44,3 +56,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+export default HeroSection;
