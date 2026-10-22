@@ -1,107 +1,141 @@
-import React from "react";
+ 
 import { useEffect, useState } from "react";
 
 export const StarBackground = () => {
-  // id, size, x, y, opacity, animationDuration
-
-  // id, size, x, y, delay, animationDuration
-
   const [stars, setStars] = useState([]);
-  const [meteors, setMeteors] = useState([]); // State to hold meteor objects
+  const [meteors, setMeteors] = useState([]);
+  const [particles, setParticles] = useState([]);
+  const [cursor, setCursor] = useState({ x: -1000, y: -1000 });
 
   useEffect(() => {
-    generateStars(); // Call the function to generate stars
-    generateMeteors(); // Call the function to generate meteors
-
-    const handleResize = () => {
-      generateStars(); // Regenerate stars on window resize
-      generateMeteors(); // Regenerate meteors on window resize
-    }
-    window.addEventListener("resize", handleResize); // Add event listener for window resize
-    return () => {
-      window.removeEventListener("resize", handleResize); // Cleanup event listener on component unmount
-    };
-  }, []); 
-
-  const generateStars = () => {
-    const numberOfStars = Math.floor(
-      (window.innerHeight * window.innerWidth) / 10000
-    ); // Adjust the divisor to control star density
-
-    const newStars = []; // Array to hold star objects
-
-    for (let i = 0; i < numberOfStars; i++) {
-      // Loop to create the specified number of stars
-      newStars.push({
+    const createStars = () =>
+      Array.from({ length: 120 }, (_, i) => ({
         id: i,
-
         size: Math.random() * 3 + 1,
-
         x: Math.random() * 100,
-
         y: Math.random() * 100,
+        duration: Math.random() * 4 + 2,
+        delay: Math.random() * 5,
+      }));
 
-        opacity: Math.random() * 0.5 + 0.5,
-
-        animationDuration: Math.random() * 4 + 2,
-      });
-    }
-
-    setStars(newStars); // Update the state with the new stars array
-  };
-
-  // Function to generate meteors
-
-  const generateMeteors = () => {
-    const numberOfMeteors = 4; // Adjust the number of meteors as needed
-
-    const newMeteors = []; // Array to hold meteor objects
-
-    for (let i = 0; i < numberOfMeteors; i++) {
-      newMeteors.push({
+    const createMeteors = () =>
+      Array.from({ length: 7 }, (_, i) => ({
         id: i,
-        size: Math.random() * 2 + 1, // Random size between 2 and 7
-        x: Math.random() * 100, // Random horizontal position
-        y: Math.random() * 12, // Random vertical position
-        delay: Math.random() * 5, // Random delay for animation
-        animationDuration: Math.random() * 3 + 3, // Random duration between 2 and 5 seconds
-      });
+        x: Math.random() * 100,
+        delay: Math.random() * 15,
+        duration: Math.random() * 3 + 3,
+      }));
+
+    const createParticles = () =>
+      Array.from({ length: 22 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        size: Math.random() * 4 + 2,
+        delay: Math.random() * 15,
+        duration: Math.random() * 12 + 12,
+        dx: `${Math.random() * 100 - 50}px`,
+      }));
+
+    setStars(createStars());
+    setMeteors(createMeteors());
+    setParticles(createParticles());
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      setCursor({ x: event.clientX, y: event.clientY });
+    };
+
+    if (window.matchMedia("(pointer: fine)").matches) {
+      window.addEventListener("mousemove", handleMouseMove);
     }
 
-    setMeteors(newMeteors); // Update the state with the new meteors array
-  };
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
-    <div className="fixed inset-0 overflow overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-base">
+      <div
+        className="aurora h-[28rem] w-[28rem] bg-violet-600/20"
+        style={{
+          top: "-8rem",
+          left: "-5rem",
+          animation: "aurora-a 24s ease-in-out infinite",
+        }}
+      />
+
+      <div
+        className="aurora h-[32rem] w-[32rem] bg-blue-500/15"
+        style={{
+          top: "25%",
+          right: "-10rem",
+          animation: "aurora-b 30s ease-in-out infinite",
+        }}
+      />
+
+      <div
+        className="aurora h-[30rem] w-[30rem] bg-pink-500/10"
+        style={{
+          bottom: "-12rem",
+          left: "25%",
+          animation: "aurora-c 28s ease-in-out infinite",
+        }}
+      />
+
+      <div className="bg-grid inset-0" />
+
       {stars.map((star) => (
         <div
           key={star.id}
-          className="star animate-pulse-subtle"
+          className="star twinkle"
           style={{
-            width: `${star.size}px`,
-            height: `${star.size}px`,
+            width: star.size,
+            height: star.size,
             left: `${star.x}%`,
             top: `${star.y}%`,
-            opacity: star.opacity,
-            animation: ` ${star.animationDuration}s `,
+            animationDuration: `${star.duration}s`,
+            animationDelay: `${star.delay}s`,
           }}
-        ></div>
+        />
       ))}
 
       {meteors.map((meteor) => (
         <div
           key={meteor.id}
-          className="meteor animate-meteor"
+          className="meteor"
           style={{
-            width: `${meteor.size*40}px`,
-            height: `${meteor.size*2}px`,
+            top: `${meteor.y ?? Math.random() * 50}%`,
             left: `${meteor.x}%`,
-            top: `${meteor.y}%`,
-            animationDelay: `${meteor.delay}s`,
-            animationDuration: `${meteor.animationDuration}s`,
+            width: "120px",
+            height: "2px",
+            animation: `meteor ${meteor.duration}s linear ${meteor.delay}s infinite`,
           }}
-        ></div>
+        />
       ))}
+
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="particle"
+          style={{
+            left: `${particle.x}%`,
+            width: particle.size,
+            height: particle.size,
+            animationDelay: `${particle.delay}s`,
+            animationDuration: `${particle.duration}s`,
+            "--dx": particle.dx,
+          }}
+        />
+      ))}
+
+      <div
+        className="cursor-glow hidden md:block"
+        style={{
+          transform: `translate(${cursor.x}px, ${cursor.y}px)`,
+        }}
+      />
     </div>
   );
 };
+
+export default StarBackground;
