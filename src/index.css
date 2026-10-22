@@ -1,7 +1,8 @@
- @import "tailwindcss";
+ 
+@import "tailwindcss";
 
 /* =========================================
-   DARK THEME — CONSISTENT ON ALL DEVICES
+   THEME
 ========================================= */
 
 @theme {
@@ -43,7 +44,7 @@
 }
 
 /* =========================================
-   GLOBAL COLORS
+   GLOBAL DARK MODE
 ========================================= */
 
 @layer base {
@@ -65,13 +66,13 @@
   html {
     scroll-behavior: smooth;
     color-scheme: dark;
-    background-color: #05060d;
+    background: #05060d;
   }
 
   body {
     margin: 0;
     min-height: 100vh;
-    background-color: #05060d;
+    background: #05060d;
     color: #f8fafc;
     color-scheme: dark;
     font-feature-settings: "rlig" 1, "calt" 1;
@@ -154,8 +155,8 @@
 }
 
 /* =========================================
-   BACKGROUND
-   Same colors on every device
+   BACKGROUND BASE
+   Deep black on all devices
 ========================================= */
 
 .bg-base {
@@ -164,25 +165,7 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-
-  background-color: #05060d;
-
-  background-image:
-    radial-gradient(
-      ellipse at 15% 15%,
-      rgba(91, 33, 182, 0.18),
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse at 85% 65%,
-      rgba(29, 78, 216, 0.14),
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse at 50% 100%,
-      rgba(157, 23, 77, 0.10),
-      transparent 50%
-    );
+  background: #05060d;
 }
 
 /* =========================================
@@ -192,8 +175,9 @@
 .aurora {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.65;
+  filter: blur(100px);
+  opacity: 0.35;
+  mix-blend-mode: normal;
   pointer-events: none;
   will-change: transform;
 }
@@ -236,12 +220,12 @@
   background-image:
     linear-gradient(
       to right,
-      rgba(167, 139, 250, 0.08) 1px,
+      rgba(167, 139, 250, 0.07) 1px,
       transparent 1px
     ),
     linear-gradient(
       to bottom,
-      rgba(167, 139, 250, 0.08) 1px,
+      rgba(167, 139, 250, 0.07) 1px,
       transparent 1px
     );
 
@@ -269,7 +253,7 @@
 }
 
 /* =========================================
-   STARS
+   TWINKLING STARS
 ========================================= */
 
 .star {
@@ -279,8 +263,8 @@
   background: #ffffff;
 
   box-shadow:
-    0 0 4px rgba(255, 255, 255, 0.9),
-    0 0 8px rgba(167, 139, 250, 0.4);
+    0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 7px rgba(167, 139, 250, 0.35);
 
   pointer-events: none;
 }
@@ -321,8 +305,8 @@
   );
 
   box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.8),
-    0 0 12px rgba(167, 139, 250, 0.6);
+    0 0 5px rgba(255, 255, 255, 0.8),
+    0 0 10px rgba(167, 139, 250, 0.6);
 
   pointer-events: none;
   will-change: transform, opacity;
@@ -337,12 +321,15 @@
     transform: translate3d(0, 0, 0) rotate(-35deg);
     opacity: 0;
   }
+
   5% {
     opacity: 1;
   }
+
   65% {
     opacity: 1;
   }
+
   100% {
     transform: translate3d(-700px, 490px, 0) rotate(-35deg);
     opacity: 0;
@@ -360,7 +347,7 @@
   border-radius: 50%;
   background: #a78bfa;
 
-  box-shadow: 0 0 8px 2px rgba(139, 92, 246, 0.45);
+  box-shadow: 0 0 7px 2px rgba(139, 92, 246, 0.4);
 
   animation-name: drift-up;
   animation-timing-function: linear;
@@ -408,17 +395,6 @@
 
   pointer-events: none;
   will-change: transform;
-}
-
-/* =========================================
-   RESPONSIVE LAYOUT ONLY
-   No device-specific color changes
-========================================= */
-
-@media (max-width: 640px) {
-  .aurora {
-    filter: blur(90px);
-  }
 }
 
 /* =========================================
