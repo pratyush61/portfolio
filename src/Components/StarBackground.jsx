@@ -9,12 +9,12 @@ export const StarBackground = () => {
 
   useEffect(() => {
     setStars(
-      Array.from({ length: 120 }, (_, id) => ({
+      Array.from({ length: 150 }, (_, id) => ({
         id,
-        size: Math.random() * 3 + 1,
         x: Math.random() * 100,
         y: Math.random() * 100,
-        duration: Math.random() * 4 + 2,
+        size: Math.random() * 2.5 + 1,
+        duration: Math.random() * 3 + 2,
         delay: Math.random() * 5,
       }))
     );
@@ -23,14 +23,14 @@ export const StarBackground = () => {
       Array.from({ length: 7 }, (_, id) => ({
         id,
         x: Math.random() * 100,
-        y: Math.random() * 50,
-        delay: Math.random() * 15,
+        y: Math.random() * 60,
+        delay: Math.random() * 12,
         duration: Math.random() * 3 + 3,
       }))
     );
 
     setParticles(
-      Array.from({ length: 22 }, (_, id) => ({
+      Array.from({ length: 25 }, (_, id) => ({
         id,
         x: Math.random() * 100,
         size: Math.random() * 4 + 2,
@@ -52,47 +52,64 @@ export const StarBackground = () => {
       window.addEventListener("mousemove", handleMouseMove);
     }
 
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-base">
+    <div
+      aria-hidden="true"
+      className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-base"
+    >
+      {/* Moving glowing orbs */}
       <div
-        className="aurora h-[28rem] w-[28rem] bg-violet-600/20"
+        className="aurora"
         style={{
+          width: "28rem",
+          height: "28rem",
           top: "-8rem",
           left: "-5rem",
+          background: "rgba(139, 92, 246, 0.22)",
           animation: "aurora-a 24s ease-in-out infinite",
         }}
       />
 
       <div
-        className="aurora h-[32rem] w-[32rem] bg-blue-500/15"
+        className="aurora"
         style={{
-          top: "25%",
+          width: "32rem",
+          height: "32rem",
+          top: "20%",
           right: "-10rem",
+          background: "rgba(59, 130, 246, 0.18)",
           animation: "aurora-b 30s ease-in-out infinite",
         }}
       />
 
       <div
-        className="aurora h-[30rem] w-[30rem] bg-pink-500/10"
+        className="aurora"
         style={{
+          width: "30rem",
+          height: "30rem",
           bottom: "-12rem",
           left: "25%",
+          background: "rgba(236, 72, 153, 0.14)",
           animation: "aurora-c 28s ease-in-out infinite",
         }}
       />
 
-      <div className="bg-grid inset-0" />
+      {/* Moving grid */}
+      <div className="bg-grid absolute inset-0" />
 
+      {/* Twinkling stars */}
       {stars.map((star) => (
         <div
           key={star.id}
           className="star twinkle"
           style={{
-            width: star.size,
-            height: star.size,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
             left: `${star.x}%`,
             top: `${star.y}%`,
             animationDuration: `${star.duration}s`,
@@ -101,6 +118,7 @@ export const StarBackground = () => {
         />
       ))}
 
+      {/* Shooting stars */}
       {meteors.map((meteor) => (
         <div
           key={meteor.id}
@@ -115,14 +133,15 @@ export const StarBackground = () => {
         />
       ))}
 
+      {/* Floating glowing particles */}
       {particles.map((particle) => (
         <div
           key={particle.id}
           className="particle"
           style={{
             left: `${particle.x}%`,
-            width: particle.size,
-            height: particle.size,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
             animationDelay: `${particle.delay}s`,
             animationDuration: `${particle.duration}s`,
             "--dx": particle.dx,
@@ -130,6 +149,7 @@ export const StarBackground = () => {
         />
       ))}
 
+      {/* Mouse-following glow */}
       <div
         className="cursor-glow hidden md:block"
         style={{
