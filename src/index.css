@@ -1,13 +1,12 @@
+ 
 @import "tailwindcss";
 
 @theme {
   --color-border: hsl(var(--border));
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
-
   --color-primary: hsl(var(--primary));
   --color-primary-foreground: hsl(var(--primary-foreground));
-
   --color-card: hsl(var(--card));
 
   --animate-float: float 6s ease-in-out infinite;
@@ -20,84 +19,51 @@
   --animate-meteor: meteor 5s linear infinite;
 
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
+
   @keyframes pulse-subtle {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.8;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
   }
+
   @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
+
   @keyframes meteor {
-    0% {
-      transform: rotate(215deg) translateX(0);
-      opacity: 1;
-    }
-    70% {
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(215deg) translateX(-500px);
-      opacity: 0;
-    }
+    0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
   }
 }
 
 @layer base {
   :root {
-    --background: 210 40% 98%;
-    --foreground: 222 47% 11%;
-
-    --card: 0 0% 100%;
-
-    --primary: 250 47% 60%;
-    --primary-foreground: 210 40% 98%;
-
-    --border: 214 32% 91%;
-  }
-
-  .dark {
+    color-scheme: dark;
     --background: 222 47% 4%;
     --foreground: 213 31% 91%;
-
     --card: 222 47% 8%;
-
     --primary: 250 65% 65%;
     --primary-foreground: 213 31% 91%;
-
     --border: 217 33% 20%;
   }
 
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
   html {
     @apply scroll-smooth;
+    color-scheme: dark;
+    background: hsl(var(--background));
   }
 
   body {
-    @apply bg-background text-foreground transition-colors duration-300;
+    @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    color-scheme: dark;
+    min-height: 100vh;
   }
 }
 
@@ -105,21 +71,11 @@
   margin-inline: auto;
   padding-inline: 2rem;
 
-  @media (width >= 640px) {
-    max-width: 640px;
-  }
-  @media (width >= 768px) {
-    max-width: 768px;
-  }
-  @media (width >= 1024px) {
-    max-width: 1024px;
-  }
-  @media (width >= 1280px) {
-    max-width: 1280px;
-  }
-  @media (width >= 1400px) {
-    max-width: 1400px;
-  }
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1400px) { max-width: 1400px; }
 }
 
 @utility text-glow {
@@ -139,9 +95,9 @@
 }
 
 @utility cosmic-button {
-  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium 
-         transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
-         hover:scale-105 active:scale-95;
+  @apply px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium
+    transition-all duration-300 hover:shadow-[0_0_10px_rgba(139,92,246,0.5)]
+    hover:scale-105 active:scale-95;
 }
 
 @utility star {
@@ -162,19 +118,109 @@
 }
 
 body {
-        display: flex;
-        flex-direction: column;
-    }
-
-  
-
-/* Keep the star-and-meteor background visible in light mode as well. */
-html:not(.dark) .star {
-  background-color: rgb(139 92 246 / 55%);
-  box-shadow: 0 0 9px 2px rgb(139 92 246 / 16%);
+  display: flex;
+  flex-direction: column;
 }
 
-html:not(.dark) .meteor {
-  background: linear-gradient(to right, rgb(99 102 241 / 70%), rgb(167 139 250 / 35%), transparent);
-  box-shadow: 0 0 10px 3px rgb(139 92 246 / 12%);
+/* Animated background */
+
+.bg-base {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, hsl(var(--primary) / 0.18), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgb(56 189 248 / 0.08), transparent 60%),
+    hsl(var(--background));
+}
+
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+  pointer-events: none;
+}
+
+@keyframes aurora-a {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(14vw, 10vh, 0) scale(1.2); }
+  66% { transform: translate3d(-6vw, 16vh, 0) scale(0.95); }
+}
+
+@keyframes aurora-b {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1.1); }
+  50% { transform: translate3d(-16vw, -10vh, 0) scale(0.9); }
+}
+
+@keyframes aurora-c {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  40% { transform: translate3d(10vw, -14vh, 0) scale(1.25); }
+  80% { transform: translate3d(-8vw, 6vh, 0) scale(1); }
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black 25%, transparent 75%);
+  animation: grid-pan 40s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes grid-pan {
+  from { background-position: 0 0; }
+  to { background-position: 56px 56px; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.twinkle {
+  animation-name: twinkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes drift-up {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.6; }
+  100% { transform: translate3d(var(--dx, 0px), -110vh, 0); opacity: 0; }
+}
+
+.particle {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 9999px;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 12px 2px hsl(var(--primary) / 0.6);
+  animation-name: drift-up;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  pointer-events: none;
+}
+
+.cursor-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.16), transparent 65%);
+  will-change: transform;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .bg-grid, .twinkle, .particle, .meteor {
+    animation: none !important;
+  }
 }
