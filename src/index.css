@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 /* =========================================
-   THEME
+   THEME AND ANIMATIONS
 ========================================= */
 
 @theme {
@@ -20,7 +20,6 @@
   --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
   --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
   --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
-  --animate-meteor: meteor 5s linear infinite;
 
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -39,7 +38,7 @@
 }
 
 /* =========================================
-   GLOBAL DARK MODE
+   GLOBAL DARK THEME
 ========================================= */
 
 @layer base {
@@ -129,20 +128,20 @@
 }
 
 /* =========================================
-   PAGE LAYOUT
+   ROOT LAYOUT
 ========================================= */
 
 #root {
   position: relative;
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0;
   text-align: center;
 }
 
 /* =========================================
-   ANIMATED BACKGROUND
+   BACKGROUND BASE
 ========================================= */
 
 .bg-base {
@@ -172,7 +171,7 @@
 }
 
 /* =========================================
-   GLOWING COLOR ORBS
+   GLOWING AURORA ORBS
 ========================================= */
 
 .aurora {
@@ -187,11 +186,8 @@
   0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
-  33% {
+  50% {
     transform: translate3d(14vw, 10vh, 0) scale(1.2);
-  }
-  66% {
-    transform: translate3d(-6vw, 16vh, 0) scale(0.95);
   }
 }
 
@@ -208,11 +204,8 @@
   0%, 100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
-  40% {
+  50% {
     transform: translate3d(10vw, -14vh, 0) scale(1.25);
-  }
-  80% {
-    transform: translate3d(-8vw, 6vh, 0) scale(1);
   }
 }
 
@@ -250,7 +243,7 @@
     transparent 80%
   );
 
-  animation: grid-pan 30s linear infinite;
+  animation: grid-pan 24s linear infinite;
   pointer-events: none;
 }
 
@@ -284,23 +277,24 @@
 
 @keyframes twinkle {
   0%, 100% {
-    opacity: 0.25;
+    opacity: 0.3;
     transform: scale(0.8);
   }
   50% {
     opacity: 1;
-    transform: scale(1.35);
+    transform: scale(1.3);
   }
 }
 
 /* =========================================
-   SHOOTING STARS - MOVING DIAGONALLY
+   SHOOTING STARS
+   Automatic, smooth, diagonal motion
 ========================================= */
 
 .meteor {
   position: absolute;
   display: block;
-  width: 120px;
+  width: 140px;
   height: 2px;
   border-radius: 999px;
 
@@ -312,19 +306,20 @@
   );
 
   box-shadow:
-    0 0 6px rgba(255, 255, 255, 0.8),
+    0 0 6px rgba(255, 255, 255, 0.9),
     0 0 14px rgba(167, 139, 250, 0.8);
-
-  transform: rotate(-35deg);
-  transform-origin: right center;
 
   pointer-events: none;
   will-change: transform, opacity;
+
+  animation-name: meteor;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 
 @keyframes meteor {
   0% {
-    transform: rotate(-35deg) translateX(0);
+    transform: translate3d(0, 0, 0) rotate(-35deg);
     opacity: 0;
   }
 
@@ -332,12 +327,12 @@
     opacity: 1;
   }
 
-  70% {
+  65% {
     opacity: 1;
   }
 
   100% {
-    transform: rotate(-35deg) translateX(-700px);
+    transform: translate3d(-700px, 490px, 0) rotate(-35deg);
     opacity: 0;
   }
 }
@@ -384,7 +379,7 @@
 }
 
 /* =========================================
-   MOUSE GLOW
+   MOUSE-FOLLOWING GLOW
 ========================================= */
 
 .cursor-glow {
@@ -417,8 +412,7 @@
   .aurora,
   .bg-grid,
   .twinkle,
-  .particle,
-  .meteor {
+  .particle {
     animation: none !important;
   }
 
